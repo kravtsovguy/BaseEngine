@@ -8,6 +8,7 @@
 
 #include "BaseEngine.hpp"
 #include "UserScript.hpp"
+#include "CameraScript.hpp"
 
 int main(int argc, const char * argv[]) {
     
@@ -16,9 +17,7 @@ int main(int argc, const char * argv[]) {
     w->init(800, 600, "openGL");
     BaseEngine* be = &BaseEngine::shared();
     be->init(w);
-    be->camera->fly(true);
     GameObject* obj = new GameObject("user");
-    //obj.getTransform()->setRotation(glm::quat({0,45,0}));
     //obj.getTransform()->setEulersAngles( {0,0,45} );
     obj->getTransform()->position = {0.0f,0.0f,0};
     Mesh* m = new Mesh();
@@ -40,7 +39,6 @@ int main(int argc, const char * argv[]) {
          */
     };
     m->setVerticies(vertices);
-    m->vsize = (int)vertices.size();
     obj->addComponent(m);
     obj->addComponent(new TextureComponent("awesomeface.png"));
     //obj->addComponent(new TextureComponent("container.png"));
@@ -49,6 +47,8 @@ int main(int argc, const char * argv[]) {
     //obj.getTransform()->rotation =  glm::vec3(0,0,45);
     //obj.getTransform()->scale = glm::vec3(2,1,1);
     be->addObject(obj);
+    
+    be->camera->getGO()->addComponent(new CameraScript());
     
     be->start();
     

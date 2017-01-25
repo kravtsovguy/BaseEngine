@@ -21,6 +21,4 @@ void UserScript::update()
     Transform* t = getGO()->getTransform();
     t->setEulersAngles(t->getEulersAngles() + glm::vec3(0,0,45*be->deltaTime));
     t->setEulersAngles(t->getEulersAngles() + glm::vec3(0,45*be->deltaTime, 0));
-    //glm::vec3 v = t->getUp();
-    //cout << v.x << " " << v.y << " " << v.z << endl;
 }

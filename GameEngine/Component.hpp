@@ -14,8 +14,7 @@ class GameObject;
 
 class Component
 {
-    //virtual void n() {}
-    
+
 public:
     virtual void start(){}
     virtual void update(){}

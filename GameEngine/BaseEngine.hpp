@@ -19,11 +19,6 @@
 #include "Mesh.hpp"
 #include "Component.hpp"
 #include "TextureComponent.hpp"
-//class Vertex;
-//class GameObject;
-//class Shader;
-//#include "GameObject.cpp"
-//#include "Shader.h"
 
 class BaseEngine;
 typedef void (* BEupdatefun)(BaseEngine* be);
@@ -46,9 +41,6 @@ public:
     void start();
     void stop();
     void addObject(GameObject* obj);
-    vector<GameObject*> objects;
-    vector<BEupdatefun> updateCallback;
-    void removeCallback(BEupdatefun callback);
     Shader* shader;
     Shader* shaderT;
     Camera* camera;
@@ -56,7 +48,7 @@ public:
     Input* input;
     GameObject* root;
     glm::vec3 clearColor = glm::vec3(0.2f, 0.3f, 0.3f);
-    GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
+    GLfloat deltaTime = 0.0f;
 
     
 private:
@@ -65,7 +57,7 @@ private:
     void draw(GameObject *root, glm::mat4 root_model);
     void callStart(GameObject* root);
     void callUpdate(GameObject* root);
-    void buildCylynder();
+    void buildAxis();
 
 };
 

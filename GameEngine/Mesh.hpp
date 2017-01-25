@@ -17,7 +17,7 @@ class Mesh : public Component
 {
 public:
     Mesh();
-    void setVerticies(vector<Vertex> vertices);
+    void setVerticies(const vector<Vertex>& vertices);
     GLuint VBO, VAO, EBO;
     GLsizei vsize;
     

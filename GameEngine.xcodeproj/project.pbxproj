@@ -18,13 +18,13 @@
 		BA72E50B1E2F98D300B2AB76 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA72E50A1E2F98D300B2AB76 /* OpenGL.framework */; };
 		BA72E50D1E2F98FF00B2AB76 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BA72E50C1E2F98FF00B2AB76 /* libglfw.3.2.dylib */; };
 		BA72E50F1E2F990F00B2AB76 /* libGLEW.2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BA72E50E1E2F990F00B2AB76 /* libGLEW.2.0.0.dylib */; };
-		BA72E5121E2F9BE300B2AB76 /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA72E5111E2F9BE300B2AB76 /* stb_image.cpp */; };
 		BA72E5151E2F9C0D00B2AB76 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA72E5141E2F9C0D00B2AB76 /* Shader.cpp */; };
 		BA72E51B1E2F9C9300B2AB76 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA72E5191E2F9C9300B2AB76 /* GameObject.cpp */; };
 		BA72E5261E2FC91900B2AB76 /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA72E5241E2FC91900B2AB76 /* Vertex.cpp */; };
 		BA72E5271E2FD6F200B2AB76 /* BaseEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA72E5211E2FC1F400B2AB76 /* BaseEngine.cpp */; };
 		BA72E52B1E30D21900B2AB76 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA72E5291E30D21900B2AB76 /* Camera.cpp */; };
 		BAD6A0E11E379C51000C6A39 /* TextureComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAD6A0DF1E379C51000C6A39 /* TextureComponent.cpp */; };
+		BAD6A0E41E3966A7000C6A39 /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAD6A0E31E3966A7000C6A39 /* stb_image.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,7 +61,6 @@
 		BA72E50C1E2F98FF00B2AB76 /* libglfw.3.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.2.dylib; path = ../../../../../../usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.2.dylib; sourceTree = "<group>"; };
 		BA72E50E1E2F990F00B2AB76 /* libGLEW.2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.0.0.dylib; path = ../../../../../../usr/local/Cellar/glew/2.0.0/lib/libGLEW.2.0.0.dylib; sourceTree = "<group>"; };
 		BA72E5101E2F9BD800B2AB76 /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
-		BA72E5111E2F9BE300B2AB76 /* stb_image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image.cpp; sourceTree = "<group>"; };
 		BA72E5131E2F9C0400B2AB76 /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
 		BA72E5141E2F9C0D00B2AB76 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
 		BA72E5161E2F9C2600B2AB76 /* shader.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shader.vs; sourceTree = "<group>"; };
@@ -80,6 +79,7 @@
 		BAD6A0DF1E379C51000C6A39 /* TextureComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureComponent.cpp; sourceTree = "<group>"; };
 		BAD6A0E01E379C51000C6A39 /* TextureComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextureComponent.hpp; sourceTree = "<group>"; };
 		BAD6A0E21E379FDB000C6A39 /* container.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = container.png; sourceTree = "<group>"; };
+		BAD6A0E31E3966A7000C6A39 /* stb_image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				BA72E5101E2F9BD800B2AB76 /* stb_image.h */,
-				BA72E5111E2F9BE300B2AB76 /* stb_image.cpp */,
+				BAD6A0E31E3966A7000C6A39 /* stb_image.cpp */,
 				BA486B8A1E3135F10041BEF4 /* Singleton.h */,
 			);
 			name = Support;
@@ -283,8 +283,8 @@
 				BA486B891E311EEA0041BEF4 /* Input.cpp in Sources */,
 				BA486B9C1E3272250041BEF4 /* CameraScript.cpp in Sources */,
 				BA72E5271E2FD6F200B2AB76 /* BaseEngine.cpp in Sources */,
+				BAD6A0E41E3966A7000C6A39 /* stb_image.cpp in Sources */,
 				BAD6A0E11E379C51000C6A39 /* TextureComponent.cpp in Sources */,
-				BA72E5121E2F9BE300B2AB76 /* stb_image.cpp in Sources */,
 				BA486B8F1E3143AE0041BEF4 /* Component.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

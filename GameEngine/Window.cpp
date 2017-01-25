@@ -12,14 +12,14 @@
 Window::Window()
 {
     std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
-    // Init GLFW
+
     if(!glfwInit())
     {
         exit(EXIT_FAILURE);
     }
     
 #ifdef __APPLE__
-    // Select OpenGL 4.1
+    // Select OpenGL 3.3
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 #else

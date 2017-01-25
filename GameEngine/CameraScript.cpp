@@ -19,9 +19,9 @@ void CameraScript::update()
     if(be->input->keys[GLFW_KEY_S])
         t->position -= cameraSpeed * t->getFront();
     if(be->input->keys[GLFW_KEY_A])
-        t->position -= cameraSpeed * t->getRight();
+        t->position += cameraSpeed * t->getLeft();
     if(be->input->keys[GLFW_KEY_D])
-        t->position += cameraSpeed * t->getRight();
+        t->position -= cameraSpeed * t->getLeft();
     
     double xpos = be->input->xpos;
     double ypos = be->input->ypos;
@@ -38,22 +38,6 @@ void CameraScript::update()
     lastX = xpos;
     lastY = ypos;
     
-    
-    if (getGO()->name == "camera")
-    {
-        //glm::vec3 v = getGO()->getTransform()->getFront();
-        glm::vec3 v = getGO()->getTransform()->getEulersAngles();
-        
-        //glm::vec3 v = glm::degrees(glm::eulerAngles(glm::quat(glm::radians(rotation))));
-        //cout << v.x << " " << v.y << " " << v.z << "\n";
-        //cout << xpos << " " << ypos << endl;
-    }
-    
-    
-    
-    //t->setEulersAngles(t->getEulersAngles() +  glm::vec3(0,0,45 * be->deltaTime));
-    
-    
     t->setEulersAngles(t->getEulersAngles() + sensitivity * glm::vec3(yoffset,xoffset,0));
     
     glm::vec3 rot = t->getEulersAngles();
@@ -69,6 +53,4 @@ void CameraScript::update()
     
     t->setEulersAngles(rot);
      
-    
-    
 }

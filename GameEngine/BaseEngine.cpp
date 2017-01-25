@@ -7,9 +7,8 @@
 //
 
 #include "BaseEngine.hpp"
-#include "CameraScript.hpp"
 
-void BaseEngine::buildCylynder()
+void BaseEngine::buildAxis()
 {
     GLfloat radius = 1;
     GLfloat height = 1;
@@ -63,12 +62,11 @@ void BaseEngine::buildCylynder()
         v.push_back({radius, 0 , 0 , r, g, b});
         
         Mesh* m = new Mesh();
-        m->vsize = (int)v.size();
         m->setVerticies(v);
         
         GameObject* obj = new GameObject();
         obj->components.push_back(m);
-        obj->name = "cylinder";
+        obj->name = "axis";
         
         Transform* t = obj->getTransform();
         t->scale = glm::vec3(0.01f,0.01f,200);
@@ -76,7 +74,6 @@ void BaseEngine::buildCylynder()
         t->position = -100.0f * glm::vec3(mask[1], -1 * mask[0], mask[2] );
         t->setEulersAngles( 90.0f * glm::vec3(mask[0],mask[1], mask[2]) );
         mask[i] = 0;
-        //objects.push_back(obj);
         addObject(obj);
     
     }
@@ -116,16 +113,10 @@ void BaseEngine::buildCylynder()
     
 }
 
-void BaseEngine::removeCallback(BEupdatefun callback)
-{
-    updateCallback.erase(remove(updateCallback.begin(), updateCallback.end(), callback), updateCallback.end());
-}
-
 void BaseEngine::initGLEW()
 {
-    // Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
     glewExperimental = GL_TRUE;
-    // Initialize GLEW to setup the OpenGL Function pointers
+    
     if (glewInit() != GLEW_OK)
     {
         std::cout << "Failed to initialize GLEW" << std::endl;
@@ -147,11 +138,9 @@ void BaseEngine::init(Window* window)
     
     GameObject* cam = new GameObject("camera");
     cam->getTransform()->position = glm::vec3(-3,3,-3);
-    //cam->getTransform()->position = glm::vec3(0,2,-7);
     //cam->getTransform()->lookAt({0,0,0});
     cam->getTransform()->setEulersAngles( {45,45,0} );
     cam->addComponent(this->camera);
-    cam->addComponent(new CameraScript());
     addObject(cam);
     
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -163,7 +152,7 @@ void BaseEngine::init(Window* window)
     
     glClearColor(clearColor[0], clearColor[1], clearColor[2], 1.0f);
     
-    buildCylynder();
+    buildAxis();
 }
 
 void BaseEngine::start()
@@ -178,17 +167,9 @@ void BaseEngine::start()
         lastFrame = currentFrame;
         
         glfwPollEvents();
-
-        /*for (int i = 0; i < updateCallback.size(); i++)
-        {
-            updateCallback[i](this);
-        }*/
-        
         
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
-        
-        
+
         callUpdate(root);
         
         draw(root, glm::mat4());
@@ -203,7 +184,6 @@ void BaseEngine::start()
 
 void BaseEngine::draw(GameObject *root, glm::mat4 root_model)
 {
-    //cout << "go: " << root->name << "\n";
     glm::mat4 model = root_model * root->getTransform()->getModelMatrix();
     
 
@@ -226,20 +206,20 @@ void BaseEngine::draw(GameObject *root, glm::mat4 root_model)
         
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, tex->texture);
-        glUniform1i(glGetUniformLocation(_shader->Program, "tex"), 0);
+        glUniform1i(glGetUniformLocation(_shader->program, "tex"), 0);
     }
     
-    _shader->Use();
+    _shader->use();
     
     glm::mat4 projection;
     projection = camera->getProjectionMatrix();
-    glUniformMatrix4fv(glGetUniformLocation(_shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniformMatrix4fv(glGetUniformLocation(_shader->program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
     
     glm::mat4 view;
     view = camera->getViewMatrix();
-    glUniformMatrix4fv(glGetUniformLocation(_shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(glGetUniformLocation(_shader->program, "view"), 1, GL_FALSE, glm::value_ptr(view));
     
-    glUniformMatrix4fv(glGetUniformLocation(_shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    glUniformMatrix4fv(glGetUniformLocation(_shader->program, "model"), 1, GL_FALSE, glm::value_ptr(model));
     
     glBindVertexArray(m->VAO);
     
@@ -257,7 +237,6 @@ void BaseEngine::stop()
 void BaseEngine::addObject(GameObject *obj)
 {
     root->children.push_back(obj);
-    //objects.push_back(obj);
 }
 void BaseEngine::callStart(GameObject* root)
 {

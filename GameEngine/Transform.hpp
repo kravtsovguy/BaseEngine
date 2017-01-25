@@ -31,12 +31,7 @@ public:
     
     glm::vec3 getFront();
     glm::vec3 getUp();
-    glm::vec3 getRight();
     glm::vec3 getLeft();
-    
-    //void setFront(glm::vec3 v);
-    //void setUp(glm::vec3 v);
-    //void setRight(glm::vec3 v);
     
     void lookAt(glm::vec3 center, glm::vec3 up = {0,1,0});
     

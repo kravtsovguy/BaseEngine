@@ -16,21 +16,15 @@ Mesh::Mesh()
     glGenBuffers(1, &EBO);
 }
 
-void Mesh::setVerticies(vector<Vertex> vertices)
+void Mesh::setVerticies(const vector<Vertex>& v)
 {
-    this->verticies = verticies;
-    //vsize = verticies.size();
-    
-    /*Vertex vertices2[] = {
-     {0.5f,  0.5f, 0.0f,      1.0f, 1.0f, 0.0f,   1.0f, 1.0f},
-     {0.5f, -0.5f, 0.0f,      0.0f, 0.0f, 1.0f,   1.0f, 0.0f},     // Нижний правый угол
-     {-0.5f, -0.5f, 0.0f,     0.0f, 0.0f, 1.0f,   0.0f, 0.0f}     // Нижний левый угол
-     };*/
+    verticies = v;
+    vsize = (int)verticies.size();
     
     glBindVertexArray(VAO);
     
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0].x, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, v.size() * sizeof(Vertex), &v[0].x, GL_STATIC_DRAW);
     
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)0);
     glEnableVertexAttribArray(0);
