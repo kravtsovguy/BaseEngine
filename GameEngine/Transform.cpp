@@ -10,28 +10,26 @@
 
 #include "GameObject.hpp"
 
-void Transform::lookAt(glm::vec3 center, glm::vec3 worldUp)
+void Transform::lookAt(glm::vec3 const& center, glm::vec3 const& up)
 {
-    /*
-    glm::vec3 front = center - position;
     
-    glm::vec3 right = glm::normalize(glm::cross(worldUp, front));
+    glm::vec3 f = glm::normalize(center - position);
     
-    glm::vec3 up = glm::normalize(glm::cross(front, right));
+    glm::vec3 s = glm::normalize(glm::cross(up, f));
     
-     */
+    glm::vec3 u = glm::normalize(glm::cross(f, s));
     
-    //setFront(front);
-    //setUp(up);
-    //setRight(right);
-    
-    //glm::quat q = glm::toQuat(glm::mat3(right,up,front));
-    
-    //glm::mat3 m = {right,up,front};
-    //glm::quat q = glm::conjugate(glm::toQuat(glm::lookAt(position, center, up)));
-    //rotation = glm::degrees(glm::eulerAngles(q));
-    
-    
+    setRotation(s, u, f);
+    //qrotation = glm::conjugate(glm::toQuat(glm::lookAt(-position, center, up)));
+}
+
+void Transform::setRotation(glm::vec3 const& left, glm::vec3 const& up, glm::vec3 const& front)
+{
+    setRotation(glm::mat3(left,up,front));
+}
+void Transform::setRotation(glm::mat3 const& mRot)
+{
+    qrotation = glm::toQuat(mRot);
 }
 
 glm::vec3 Transform::getLeft()
@@ -55,7 +53,7 @@ glm::mat4 Transform::getTranslationMatrix()
 
 glm::mat4 Transform::getRotationMatrix()
 {
-    //return glm::toMat4(qrotation);
+    return glm::toMat4(qrotation);
     
     glm::mat4 rX = glm::rotate(glm::radians(rotation[0]), glm::vec3(1.0f, 0.0f, 0.0f));
     glm::mat4 rY = glm::rotate(glm::radians(rotation[1]), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -86,17 +84,42 @@ glm::mat4 Transform::getModelMatrix()
 
 glm::vec3 Transform::getEulersAngles()
 {
-    return rotation;
-    //return glm::degrees(glm::eulerAngles(qrotation));
+    //return rotation;
+    return glm::degrees(glm::eulerAngles(qrotation));
 }
 
-void Transform::setEulersAngles(glm::vec3 angles)
+void Transform::setEulersAngles(glm::vec3 const& angles)
 {
     rotation = angles;
+    qrotation = getQuat(angles);
+    
+}
+
+void Transform::rotate(glm::vec3 const& angles, bool world)
+{
+    rotation += angles;
+    
+    if (world)
+        qrotation = getQuat(angles) * qrotation;
+    else
+        qrotation = qrotation * getQuat(angles);
+}
+glm::quat Transform::getQuat(glm::vec3 const& angles)
+{
+    using namespace glm;
+    
+    vec3 ang = radians(angles);
     /*
-    glm::quat qPitch = glm::angleAxis(glm::radians(angles.x), glm::vec3(1, 0, 0));
-    glm::quat qYaw = glm::angleAxis(glm::radians(angles.y), glm::vec3(0, 1, 0));
-    glm::quat qRoll = glm::angleAxis(glm::radians(angles.z),glm::vec3(0,0,1));
-    qrotation = qYaw * qPitch * qRoll;
-     */
+    quat q;
+    q = glm::rotate(q, angles);
+    q = glm::rotate(q, angles.y, {0,1,0});
+    q = glm::rotate(q, angles.x, {1,0,0});
+    q = glm::rotate(q, angles.z, {0,0,1});
+    return q;
+    */
+    quat qPitch  = angleAxis(ang.x, vec3(1, 0, 0));
+    quat qYaw    = angleAxis(ang.y, vec3(0, 1, 0));
+    quat qRoll   = angleAxis(ang.z, vec3(0, 0, 1));
+    
+    return qYaw * qPitch * qRoll;
 }

@@ -11,6 +11,7 @@
 
 glm::mat4 Camera::getViewMatrix()
 {
+    
     Transform* t = getGO()->getTransform();
     
     glm::mat4 m = t->getRotationMatrix();
@@ -19,11 +20,12 @@ glm::mat4 Camera::getViewMatrix()
     return glm::inverse(t->getTranslationMatrix() * m);
     
     /*
-     glm::vec3 p = getGO()->getTransform()->position;
-     glm::vec3 f = getGO()->getTransform()->getFront();
-     glm::vec3 u = getGO()->getTransform()->getUp();
-     glm::mat4 view = glm::lookAt(p, p + f, u);
-    */
+    glm::vec3 p = getGO()->getTransform()->position;
+    glm::vec3 f = getGO()->getTransform()->getFront();
+    glm::vec3 u = getGO()->getTransform()->getUp();
+    glm::mat4 view = glm::lookAt(p, p + f, u);
+    return view;
+     */
     
 }
 

@@ -13,7 +13,8 @@
 
 class CameraScript : public Component
 {
-    virtual void update();
+    void start();
+    void update();
     
 public:
     GLfloat sensitivity = 0.05f;

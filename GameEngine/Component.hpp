@@ -16,10 +16,11 @@ class Component
 {
 
 public:
+    virtual ~Component() {}
     virtual void start(){}
     virtual void update(){}
     bool enabled = true;
-    GameObject* getGO()
+    GameObject* getGO() const
     {
         return _go;
     }

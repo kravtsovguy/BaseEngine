@@ -8,10 +8,26 @@
 
 #include "CameraScript.hpp"
 
+void CameraScript::start()
+{
+    BaseEngine* be = &BaseEngine::shared();
+    Transform* t = getGO()->getTransform();
+    
+    //t->position = {3,3,3};
+    //t->setEulersAngles({0,180,0});
+    
+    t->position = {3,3,3};
+    t->setEulersAngles({ 45, 180 + 45,0});
+    t->lookAt({0,0,0});
+}
+
 void CameraScript::update()
 {
     BaseEngine* be = &BaseEngine::shared();
     Transform* t = getGO()->getTransform();
+    
+    auto v = t->getEulersAngles();
+    cout << v.x << " " << v.y << " " << v.z << endl;
 
     GLfloat cameraSpeed = 5.0f * be->deltaTime;
     if(be->input->keys[GLFW_KEY_W])
@@ -37,20 +53,7 @@ void CameraScript::update()
     GLfloat yoffset = ypos - lastY;
     lastX = xpos;
     lastY = ypos;
-    
-    t->setEulersAngles(t->getEulersAngles() + sensitivity * glm::vec3(yoffset,xoffset,0));
-    
-    glm::vec3 rot = t->getEulersAngles();
-    
-    if (rot.x > 89.0f)
-        rot.x = 89;
-    
-    if (rot.x < -89.0f)
-        rot.x = -89;
-    
-    if (glm::abs(rot.y) > 360)
-        rot.y = 0;
-    
-    t->setEulersAngles(rot);
-     
+
+    t->rotate(sensitivity * glm::vec3(yoffset,0,0));
+    t->rotate(sensitivity * glm::vec3(0,xoffset,0),1);
 }

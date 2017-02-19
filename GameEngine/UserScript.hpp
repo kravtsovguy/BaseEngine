@@ -13,8 +13,8 @@
 
 class UserScript : public Component
 {
-    virtual void start();
-    virtual void update();
+    void start();
+    void update();
 };
 
 #endif /* UserScript_hpp */

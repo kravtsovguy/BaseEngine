@@ -11,7 +11,7 @@
 
 GameObject::GameObject()
 {
-    components.push_back(new Transform());
+    addComponent(new Transform());
 }
 
 Transform* GameObject::getTransform()

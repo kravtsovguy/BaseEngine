@@ -14,7 +14,7 @@ int main(int argc, const char * argv[]) {
     
     
     Window* w = new Window();
-    w->init(800, 600, "openGL");
+    w->init(800, 600, "Base Engine");
     BaseEngine* be = &BaseEngine::shared();
     be->init(w);
     GameObject* obj = new GameObject("user");
@@ -38,6 +38,7 @@ int main(int argc, const char * argv[]) {
         {0.5f, 0.5f, -1.0f,     1.0f, 0.0f, 0.0f,   1.0f, 1.0f},
          */
     };
+    
     m->setVerticies(vertices);
     obj->addComponent(m);
     obj->addComponent(new TextureComponent("awesomeface.png"));
