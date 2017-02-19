@@ -14,6 +14,8 @@
 #include "GameObject.hpp"
 #include "Shader.hpp"
 #include "Camera.hpp"
+#include "CameraPerspective.hpp"
+#include "CameraOrtho.hpp"
 #include "Window.hpp"
 #include "Input.hpp"
 #include "Mesh.hpp"
@@ -21,7 +23,6 @@
 #include "TextureComponent.hpp"
 
 class BaseEngine;
-typedef void (* BEupdatefun)(BaseEngine* be);
 
 class BaseEngine
 {

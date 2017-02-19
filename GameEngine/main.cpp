@@ -21,7 +21,7 @@ int main(int argc, const char * argv[]) {
     //obj.getTransform()->setEulersAngles( {0,0,45} );
     obj->getTransform()->position = {0.0f,0.0f,0};
     Mesh* m = new Mesh();
-    vector<Vertex> vertices = {
+    std::vector<Vertex> vertices = {
         {0.5f,  0.5f, 0.0f,      1.0f, 1.0f, 0.0f,   1.0f, 1.0f},
         {0.5f, -0.5f, 0.0f,      0.0f, 0.0f, 1.0f,   1.0f, 0.0f},
         {-0.5f, -0.5f, 0.0f,     0.0f, 0.0f, 1.0f,   0.0f, 0.0f},

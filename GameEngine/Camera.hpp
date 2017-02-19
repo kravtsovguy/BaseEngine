@@ -15,18 +15,16 @@
 class Camera : public Component
 {
 public:
-    
-    Camera(GLfloat ratio)
-    {
-        this->ratio = ratio;
-    }
-    GLfloat ratio;
-    GLfloat fov = 45.0f;
-    GLfloat znear = 0.1f;
-    GLfloat zfar = 100.0f;
     glm::mat4 getViewMatrix();
     glm::mat4 getProjectionMatrix();
     glm::mat4 getMatrix();
+    virtual bool isOrtho() = 0;
+    
+protected:
+    virtual glm::mat4 calcProjectionMatrix() = 0;
+    glm::mat4 _mProj;
+    glm::mat4 _mView;
+    glm::mat4 _mModel;
 };
 
 #endif /* Camera_hpp */

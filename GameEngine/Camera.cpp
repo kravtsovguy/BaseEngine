@@ -11,13 +11,16 @@
 
 glm::mat4 Camera::getViewMatrix()
 {
+    glm::mat4 m = getGO()->getTransform()->getModelMatrix();
+    //m[0] *= -1;
+    //m[2] *= -1;
     
-    Transform* t = getGO()->getTransform();
+    if (m == _mModel)
+        return _mView;
     
-    glm::mat4 m = t->getRotationMatrix();
-    m[0] = -m[0];
-    m[2] = -m[2];
-    return glm::inverse(t->getTranslationMatrix() * m);
+    _mModel = m;
+    _mView = glm::inverse(m);
+    return _mView;
     
     /*
     glm::vec3 p = getGO()->getTransform()->position;
@@ -31,8 +34,11 @@ glm::mat4 Camera::getViewMatrix()
 
 glm::mat4 Camera::getProjectionMatrix()
 {
-    glm::mat4 proj = glm::perspective(glm::radians(45.0f), ratio, 0.1f, 100.0f);
-    return proj;
+    if (_mProj != glm::mat4())
+        return _mProj;
+    
+    _mProj = calcProjectionMatrix() * glm::scale(glm::vec3(1,1,-1));
+    return _mProj;
 }
 
 glm::mat4 Camera::getMatrix()

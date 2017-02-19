@@ -15,9 +15,9 @@ class Window
 {
 public:
     Window();
-    void init(GLint width, GLint height, const string& title);
+    void init(GLint width, GLint height, const std::string& title);
     GLFWwindow* w;
-    string title;
+    std::string title;
     GLint width, height;
     
 private:

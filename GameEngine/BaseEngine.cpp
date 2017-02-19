@@ -30,7 +30,7 @@ void BaseEngine::buildAxis()
         g = mask[0];
         b = mask[2];
         
-        vector<Vertex> v;
+        std::vector<Vertex> v;
         angle = 0.0;
         bool q = true;
         while(q)
@@ -131,7 +131,8 @@ void BaseEngine::init(Window* window)
     initGLEW();
     this->window = window;
     this->input = new Input(window);
-    this->camera = new Camera((GLfloat)window->width/(GLfloat)window->height);
+    this->camera = new CameraPerspective(45.0f, (GLfloat)window->width/(GLfloat)window->height, 0.1f, 100.0f);
+    //this->camera = new CameraOrtho(-1,1,-1,1,0.1f,100.0f);
     this->shader = new Shader("shader.vs", "shader.frag");
     this->shaderT = new Shader("shader.vs", "shaderTexture.frag");
     this->root = new GameObject("root");
@@ -217,6 +218,7 @@ void BaseEngine::draw(GameObject *root, glm::mat4 root_model)
     
     glm::mat4 view;
     view = camera->getViewMatrix();
+    
     glUniformMatrix4fv(glGetUniformLocation(_shader->program, "view"), 1, GL_FALSE, glm::value_ptr(view));
     
     glUniformMatrix4fv(glGetUniformLocation(_shader->program, "model"), 1, GL_FALSE, glm::value_ptr(model));

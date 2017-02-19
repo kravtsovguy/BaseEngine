@@ -17,12 +17,12 @@ class Mesh : public Component
 {
 public:
     Mesh();
-    void setVerticies(const vector<Vertex>& vertices);
+    void setVerticies(const std::vector<Vertex>& vertices);
     GLuint VBO, VAO, EBO;
     GLsizei vsize;
     
 private:
-    vector<Vertex> verticies;
+    std::vector<Vertex> verticies;
     
 };
 

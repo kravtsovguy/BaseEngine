@@ -33,7 +33,7 @@ Window::Window()
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 }
 
-void Window::init(GLint width, GLint height, const string& title)
+void Window::init(GLint width, GLint height, const std::string& title)
 {
     this->width = width;
     this->height = height;

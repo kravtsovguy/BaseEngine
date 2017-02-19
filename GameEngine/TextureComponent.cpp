@@ -9,7 +9,7 @@
 #include "TextureComponent.hpp"
 
 
-TextureComponent::TextureComponent(const string& filename)
+TextureComponent::TextureComponent(const std::string& filename)
 {
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);

@@ -19,8 +19,8 @@ class Input
 {
 public:
     Input(Window* window);
-    vector<BEkeyfun> keyCallback;
-    vector<BEcursorposfun> cursorposCallback;
+    std::vector<BEkeyfun> keyCallback;
+    std::vector<BEcursorposfun> cursorposCallback;
     double xpos,ypos;
     bool keys[2014] = {false};
 };

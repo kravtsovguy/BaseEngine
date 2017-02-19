@@ -8,16 +8,18 @@
 
 #include "CameraScript.hpp"
 
+using namespace std;
+
 void CameraScript::start()
 {
-    BaseEngine* be = &BaseEngine::shared();
+    //BaseEngine* be = &BaseEngine::shared();
     Transform* t = getGO()->getTransform();
     
     //t->position = {3,3,3};
     //t->setEulersAngles({0,180,0});
     
-    t->position = {3,3,3};
-    t->setEulersAngles({ 45, 180 + 45,0});
+    t->position = {3,3,-1};
+    //t->setEulersAngles({ 45, 180 + 45,0});
     t->lookAt({0,0,0});
 }
 
@@ -27,7 +29,7 @@ void CameraScript::update()
     Transform* t = getGO()->getTransform();
     
     auto v = t->getEulersAngles();
-    cout << v.x << " " << v.y << " " << v.z << endl;
+    cout << v.x << " " << v.y << " " << v.z << std::endl;
 
     GLfloat cameraSpeed = 5.0f * be->deltaTime;
     if(be->input->keys[GLFW_KEY_W])
@@ -35,9 +37,9 @@ void CameraScript::update()
     if(be->input->keys[GLFW_KEY_S])
         t->position -= cameraSpeed * t->getFront();
     if(be->input->keys[GLFW_KEY_A])
-        t->position += cameraSpeed * t->getLeft();
+        t->position -= cameraSpeed * t->getRight();
     if(be->input->keys[GLFW_KEY_D])
-        t->position -= cameraSpeed * t->getLeft();
+        t->position += cameraSpeed * t->getRight();
     
     double xpos = be->input->xpos;
     double ypos = be->input->ypos;
@@ -49,7 +51,7 @@ void CameraScript::update()
     }
     
     
-    GLfloat xoffset = lastX - xpos;
+    GLfloat xoffset = xpos - lastX;
     GLfloat yoffset = ypos - lastY;
     lastX = xpos;
     lastY = ypos;

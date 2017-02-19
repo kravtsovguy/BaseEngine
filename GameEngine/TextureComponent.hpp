@@ -15,7 +15,7 @@
 class TextureComponent : public Component
 {
 public:
-    TextureComponent(const string& filename);
+    TextureComponent(const std::string& filename);
     GLuint texture;
 };
 

@@ -16,7 +16,7 @@ Mesh::Mesh()
     glGenBuffers(1, &EBO);
 }
 
-void Mesh::setVerticies(const vector<Vertex>& v)
+void Mesh::setVerticies(const std::vector<Vertex>& v)
 {
     verticies = v;
     vsize = (int)verticies.size();

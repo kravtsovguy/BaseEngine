@@ -18,7 +18,7 @@ class GameObject
 {
 public:
     GameObject();
-    GameObject(const string& name) : GameObject()
+    GameObject(const std::string& name) : GameObject()
     {
         this->name = name;
     }
@@ -40,9 +40,9 @@ public:
         }
         return nullptr;
     }
-    vector<GameObject*> children;
-    vector<Component*> components;
-    string name;
+    std::vector<GameObject*> children;
+    std::vector<Component*> components;
+    std::string name;
     
 };
 

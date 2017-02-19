@@ -35,15 +35,22 @@ public:
     
     glm::vec3 getFront();
     glm::vec3 getUp();
-    glm::vec3 getLeft();
+    glm::vec3 getRight();
     
-    void setRotation(glm::vec3 const& left, glm::vec3 const& up, glm::vec3 const& front);
+    void setRotation(glm::vec3 const& right, glm::vec3 const& up, glm::vec3 const& front);
     void setRotation(glm::mat3 const& mRot);
     
     void lookAt(glm::vec3 const& center, glm::vec3 const& up = {0,1,0});
     
 protected:
-    glm::vec3 rotation = glm::vec3(0,0,0);
+    
+    glm::vec3 _pos;
+    glm::vec3 _scale;
+    glm::quat _rot;
+    glm:: mat4 _mTrans;
+    glm:: mat4 _mScale;
+    glm:: mat4 _mRot;
+    glm:: mat4 _mModel;
     
 };
 

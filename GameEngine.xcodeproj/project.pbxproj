@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA0B713D1E59EEA0003CDA93 /* CameraOrtho.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA0B713B1E59EEA0003CDA93 /* CameraOrtho.cpp */; };
+		BA0B71401E59EEBD003CDA93 /* CameraPerspective.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA0B713E1E59EEBD003CDA93 /* CameraPerspective.cpp */; };
 		BA486B861E3101EE0041BEF4 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA486B841E3101EE0041BEF4 /* Window.cpp */; };
 		BA486B891E311EEA0041BEF4 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA486B871E311EEA0041BEF4 /* Input.cpp */; };
 		BA486B8F1E3143AE0041BEF4 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA486B8D1E3143AE0041BEF4 /* Component.cpp */; };
@@ -40,6 +42,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BA0B713B1E59EEA0003CDA93 /* CameraOrtho.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraOrtho.cpp; sourceTree = "<group>"; };
+		BA0B713C1E59EEA0003CDA93 /* CameraOrtho.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CameraOrtho.hpp; sourceTree = "<group>"; };
+		BA0B713E1E59EEBD003CDA93 /* CameraPerspective.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraPerspective.cpp; sourceTree = "<group>"; };
+		BA0B713F1E59EEBD003CDA93 /* CameraPerspective.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CameraPerspective.hpp; sourceTree = "<group>"; };
 		BA486B841E3101EE0041BEF4 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		BA486B851E3101EE0041BEF4 /* Window.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
 		BA486B871E311EEA0041BEF4 /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
@@ -96,6 +102,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA0B71421E59F9BE003CDA93 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				BA72E5291E30D21900B2AB76 /* Camera.cpp */,
+				BA72E52A1E30D21900B2AB76 /* Camera.hpp */,
+				BA0B713B1E59EEA0003CDA93 /* CameraOrtho.cpp */,
+				BA0B713C1E59EEA0003CDA93 /* CameraOrtho.hpp */,
+				BA0B713E1E59EEBD003CDA93 /* CameraPerspective.cpp */,
+				BA0B713F1E59EEBD003CDA93 /* CameraPerspective.hpp */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
 		BA486B931E31445F0041BEF4 /* GameObject */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +183,7 @@
 		BA72E51C1E2F9CFA00B2AB76 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				BA0B71421E59F9BE003CDA93 /* Camera */,
 				BA486B9D1E32C6CD0041BEF4 /* Scripts */,
 				BA486B931E31445F0041BEF4 /* GameObject */,
 				BA72E51F1E2F9D2D00B2AB76 /* Support */,
@@ -175,8 +195,6 @@
 				BA72E5221E2FC1F400B2AB76 /* BaseEngine.hpp */,
 				BA72E5241E2FC91900B2AB76 /* Vertex.cpp */,
 				BA72E5251E2FC91900B2AB76 /* Vertex.hpp */,
-				BA72E5291E30D21900B2AB76 /* Camera.cpp */,
-				BA72E52A1E30D21900B2AB76 /* Camera.hpp */,
 				BA486B841E3101EE0041BEF4 /* Window.cpp */,
 				BA486B851E3101EE0041BEF4 /* Window.hpp */,
 				BA486B871E311EEA0041BEF4 /* Input.cpp */,
@@ -276,6 +294,7 @@
 				BA72E5151E2F9C0D00B2AB76 /* Shader.cpp in Sources */,
 				BA72E52B1E30D21900B2AB76 /* Camera.cpp in Sources */,
 				BA486B991E3149100041BEF4 /* Mesh.cpp in Sources */,
+				BA0B713D1E59EEA0003CDA93 /* CameraOrtho.cpp in Sources */,
 				BA486B861E3101EE0041BEF4 /* Window.cpp in Sources */,
 				BA72E5031E2F8E1E00B2AB76 /* main.cpp in Sources */,
 				BA486B961E3144E10041BEF4 /* Transform.cpp in Sources */,
@@ -285,6 +304,7 @@
 				BA72E5271E2FD6F200B2AB76 /* BaseEngine.cpp in Sources */,
 				BAD6A0E41E3966A7000C6A39 /* stb_image.cpp in Sources */,
 				BAD6A0E11E379C51000C6A39 /* TextureComponent.cpp in Sources */,
+				BA0B71401E59EEBD003CDA93 /* CameraPerspective.cpp in Sources */,
 				BA486B8F1E3143AE0041BEF4 /* Component.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
