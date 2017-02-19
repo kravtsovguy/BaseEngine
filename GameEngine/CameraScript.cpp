@@ -57,5 +57,5 @@ void CameraScript::update()
     lastY = ypos;
 
     t->rotate(sensitivity * glm::vec3(yoffset,0,0));
-    t->rotate(sensitivity * glm::vec3(0,xoffset,0),1);
+    t->rotate(sensitivity * glm::vec3(0,xoffset,0),true);
 }

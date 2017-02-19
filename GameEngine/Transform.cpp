@@ -8,17 +8,13 @@
 
 #include "Transform.hpp"
 
-#include "GameObject.hpp"
-
 void Transform::lookAt(glm::vec3 const& center, glm::vec3 const& up)
 {
-    
     glm::vec3 f = glm::normalize(center - position);
     glm::vec3 s = glm::normalize(glm::cross(up, f));
     glm::vec3 u = glm::normalize(glm::cross(f, s));
     
     setRotation(s, u, f);
-    //qrotation = glm::conjugate(glm::toQuat(glm::lookAt(-position, center, up)));
 }
 
 void Transform::setRotation(glm::vec3 const& right, glm::vec3 const& up, glm::vec3 const& front)

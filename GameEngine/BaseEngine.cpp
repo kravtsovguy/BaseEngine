@@ -78,39 +78,6 @@ void BaseEngine::buildAxis()
     
     }
     
-    
-    /*glBindVertexArray(m.VAO);
-    
-    glDrawArrays(GL_TRIANGLES, 0, m.vsize);
-    
-    glBindVertexArray(0);*/
-    
-    /*
-    glBegin(GL_QUAD_STRIP);
-    angle = 0.0;
-    while( angle < 2*M_PI ) {
-        x = radius * cos(angle);
-        y = radius * sin(angle);
-        glVertex3f(x, y , height);
-        glVertex3f(x, y , 0.0);
-        angle = angle + angle_stepsize;
-    }
-    glVertex3f(radius, 0.0, height);
-    glVertex3f(radius, 0.0, 0.0);
-    glEnd();
-
-    glBegin(GL_POLYGON);
-    angle = 0.0;
-    while( angle < 2*M_PI ) {
-        x = radius * cos(angle);
-        y = radius * sin(angle);
-        glVertex3f(x, y , height);
-        angle = angle + angle_stepsize;
-    }
-    glVertex3f(radius, 0.0, height);
-    glEnd();
-    */
-    
 }
 
 void BaseEngine::initGLEW()
@@ -138,9 +105,6 @@ void BaseEngine::init(Window* window)
     this->root = new GameObject("root");
     
     GameObject* cam = new GameObject("camera");
-    cam->getTransform()->position = glm::vec3(-3,3,-3);
-    //cam->getTransform()->lookAt({0,0,0});
-    cam->getTransform()->setEulersAngles( {45,45,0} );
     cam->addComponent(this->camera);
     addObject(cam);
     
@@ -197,14 +161,12 @@ void BaseEngine::draw(GameObject *root, glm::mat4 root_model)
     if (!m)
         return;
     
-    TextureComponent* tex = root->findComponent<TextureComponent>();
-    
     Shader* _shader = shader;
-    if (tex)
+    
+    if (TextureComponent* tex = root->findComponent<TextureComponent>())
     {
         _shader = shaderT;
-        
-        
+
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, tex->texture);
         glUniform1i(glGetUniformLocation(_shader->program, "tex"), 0);
@@ -212,15 +174,12 @@ void BaseEngine::draw(GameObject *root, glm::mat4 root_model)
     
     _shader->use();
     
-    glm::mat4 projection;
+    glm::mat4 projection, view;
     projection = camera->getProjectionMatrix();
-    glUniformMatrix4fv(glGetUniformLocation(_shader->program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-    
-    glm::mat4 view;
     view = camera->getViewMatrix();
     
+    glUniformMatrix4fv(glGetUniformLocation(_shader->program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix4fv(glGetUniformLocation(_shader->program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    
     glUniformMatrix4fv(glGetUniformLocation(_shader->program, "model"), 1, GL_FALSE, glm::value_ptr(model));
     
     glBindVertexArray(m->VAO);

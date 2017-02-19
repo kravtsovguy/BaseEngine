@@ -12,8 +12,6 @@
 glm::mat4 Camera::getViewMatrix()
 {
     glm::mat4 m = getGO()->getTransform()->getModelMatrix();
-    //m[0] *= -1;
-    //m[2] *= -1;
     
     if (m == _mModel)
         return _mView;
@@ -22,14 +20,6 @@ glm::mat4 Camera::getViewMatrix()
     _mView = glm::inverse(m);
     return _mView;
     
-    /*
-    glm::vec3 p = getGO()->getTransform()->position;
-    glm::vec3 f = getGO()->getTransform()->getFront();
-    glm::vec3 u = getGO()->getTransform()->getUp();
-    glm::mat4 view = glm::lookAt(p, p + f, u);
-    return view;
-     */
-    
 }
 
 glm::mat4 Camera::getProjectionMatrix()
@@ -37,6 +27,7 @@ glm::mat4 Camera::getProjectionMatrix()
     if (_mProj != glm::mat4())
         return _mProj;
     
+    //change coordinate space to LH
     _mProj = calcProjectionMatrix() * glm::scale(glm::vec3(1,1,-1));
     return _mProj;
 }
