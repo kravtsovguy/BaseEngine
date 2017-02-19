@@ -53,11 +53,16 @@ public:
 
     
 private:
+    enum EventType
+    {
+        startEvent = 0,
+        updateEvent
+    };
+    
     GLfloat lastFrame = 0.0f;
     void initGLEW();
     void draw(GameObject *root, glm::mat4 root_model);
-    void callStart(GameObject* root);
-    void callUpdate(GameObject* root);
+    void callEvent(GameObject* root, EventType event);
     void buildAxis();
 
 };

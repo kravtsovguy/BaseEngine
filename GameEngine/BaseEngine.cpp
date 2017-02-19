@@ -122,7 +122,7 @@ void BaseEngine::init(Window* window)
 
 void BaseEngine::start()
 {
-    callStart(root);
+    callEvent(root, startEvent);
     
     while (!glfwWindowShouldClose(window->w))
     {
@@ -135,7 +135,7 @@ void BaseEngine::start()
         
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        callUpdate(root);
+        callEvent(root, updateEvent);
         
         draw(root, glm::mat4());
         
@@ -192,34 +192,34 @@ void BaseEngine::draw(GameObject *root, glm::mat4 root_model)
 void BaseEngine::stop()
 {
     glfwSetWindowShouldClose(window->w, GL_TRUE);
-    //glfwTerminate();
 }
 
 void BaseEngine::addObject(GameObject *obj)
 {
     root->children.push_back(obj);
 }
-void BaseEngine::callStart(GameObject* root)
+
+void BaseEngine::callEvent(GameObject* root, EventType event)
 {
     for (int i = 0; i < root->children.size(); i++)
-        callStart(root->children[i]);
+        callEvent(root->children[i],event);
     
     for (int i = 0; i < root->components.size(); i++)
     {
         if (!root->components[i]->enabled) continue;
         root->components[i]->setGO(root);
-        root->components[i]->start();
-    }
-}
-void BaseEngine::callUpdate(GameObject* root)
-{
-    for (int i = 0; i < root->children.size(); i++)
-        callUpdate(root->children[i]);
-    
-    for (int i = 0; i < root->components.size(); i++)
-    {
-        if (!root->components[i]->enabled) continue;
-        root->components[i]->setGO(root);
-        root->components[i]->update();
+        switch (event)
+        {
+            case startEvent:
+                root->components[i]->start();
+                break;
+                
+            case updateEvent:
+                root->components[i]->update();
+                break;
+                
+            default:
+                break;
+        }
     }
 }
